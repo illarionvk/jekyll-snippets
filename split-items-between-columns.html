@@ -1,4 +1,4 @@
-<!-- Split FAQ entries between two Columns -->
+<!-- Split FAQ entries between two columns -->
 <div class="row">
   <div class="col-md-6">
     <ul>
@@ -24,3 +24,24 @@
   </div>
 </div>
 
+<!-- Split FAQ entries between three columns -->
+<div class="row">
+  {% for post in site.categories.frequently-asked-questions %}
+    {% assign first_third = forloop.length | divided_by: 3 %}
+    {% assign next_third_start = forloop.length | divided_by: 3 | plus: 1 %}
+    {% assign next_third_end = forloop.length | divided_by: 3 | times: 2 %}
+    {% assign last_third_start = forloop.length | divided_by: 3 | times: 2 | plus: 1%}
+
+    {% if forloop.first or forloop.index == next_third_start or forloop.index == last_third_start %}
+      <div class="col-md-4">
+        <ul>
+    {% endif %}
+
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+
+    {% if forloop.index == first_third or forloop.index == next_third_end or forloop.last %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
