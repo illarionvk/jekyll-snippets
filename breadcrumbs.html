@@ -1,0 +1,25 @@
+<!-- Twitter Bootstrap 3 style -->
+<ol class="breadcrumb">
+{% for category in page.categories %}
+  {% capture category_with_slash %}{{ category }}/index.html{% endcapture %}
+  {% assign category_page_found = false %}
+  <li>
+    {% for category_page in site.pages %}
+      {% if category_page.url contains category_with_slash %}
+        {% if category_page.title and category_page.title != '' %}
+          <a href="{{ category_page.url }}">
+            {{ category_page.title }}
+          </a>
+          {% assign category_page_found = true %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% unless category_page_found %}
+      {{ category }}
+    {% endunless %}
+  </li>
+{% endfor %}
+  <li class="active">{{ page.title }}</li>
+</ol>
+
