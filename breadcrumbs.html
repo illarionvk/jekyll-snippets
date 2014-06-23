@@ -27,7 +27,7 @@
     {% endfor %}
 
     {% unless category_page_found %}
-      {{ category }}
+      {{ category | capitalize | replace: '-', ' ' }}
     {% endunless %}
   </li>
 {% endfor %}
