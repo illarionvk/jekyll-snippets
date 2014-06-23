@@ -18,7 +18,7 @@
     {% for category_page in site.pages %}
       {% if category_page.url contains category_with_slash %}
         {% if category_page.title and category_page.title != '' %}
-          <a href="{{ category_page.url }}">
+          <a href="{{ category_page.url | replace: 'index.html', '' }}">
             {{ category_page.title }}
           </a>
           {% assign category_page_found = true %}
