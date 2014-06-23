@@ -1,7 +1,18 @@
 <!-- Twitter Bootstrap 3 style -->
 <ol class="breadcrumb">
 {% for category in page.categories %}
-  {% capture category_with_slash %}{{ category }}/index.html{% endcapture %}
+
+  {% assign current_index = forloop.index %}
+  {% assign page_cats = page.categories | join: '/' %}
+  {% for element in page.categories %}
+    {% if forloop.index > current_index %}
+      {% capture page_cats %}{{ page_cats | replace: element, '' }}{% endcapture %}
+    {% endif %}
+  {% endfor %}
+  {% capture category_with_slash %}{{ page_cats | replace: '//', '/' }}/index.html{% endcapture %}
+  {% capture category_with_slash %}{{ category_with_slash | replace: '//', '/' }}{% endcapture %}
+
+  <!-- Category path: {{ category_with_slash }} -->
   {% assign category_page_found = false %}
   <li>
     {% for category_page in site.pages %}
