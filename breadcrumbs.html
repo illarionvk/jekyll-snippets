@@ -31,6 +31,8 @@
     {% endunless %}
   </li>
 {% endfor %}
-  <li class="active">{{ page.title }}</li>
+  <li class="active">
+    {{ page.title | truncatewords: 10 }}
+  </li>
 </ol>
 
